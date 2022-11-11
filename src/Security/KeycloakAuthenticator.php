@@ -3,6 +3,7 @@
 namespace App\Security;
 
 use App\Entity\User;
+use App\Repository\UserEntityRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -27,7 +28,7 @@ class KeycloakAuthenticator extends AbstractAuthenticator
         private EntityManagerInterface $entityManager,
         private ParameterBagInterface  $parameterBag,
         private TagAwareCacheInterface $cacheApp,
-        private UserRepository         $userRepository
+        private UserEntityRepository         $userEntityRepository
     )
     {
     }

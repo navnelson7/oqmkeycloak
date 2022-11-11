@@ -12,7 +12,10 @@ security:
             security: false
         main:
             lazy: true
-            provider: users_in_memory
+            #provider: users_in_memory
+            custom_authenticators:
+                - App\Security\KeycloakAuthenticator
+
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -25,6 +28,8 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/docs, roles: IS_AUTHENTICATED_ANONYMOUSLY } }
+        - { path: ^/, roles: ROLE_USER }
 
 when@test:
     security:
@@ -38,3 +43,19 @@ when@test:
                 cost: 4 # Lowest possible value for bcrypt
                 time_cost: 3 # Lowest possible value for argon
                 memory_cost: 10 # Lowest possible value for argon
+#security:
+#    enable_authenticator_manager: true
+#
+#    firewalls:
+#        dev:
+#            pattern: ^/(_(profiler|wdt)|css|images|js)/
+#            security: false
+#
+#        main:
+#            lazy: true
+#            custom_authenticators:
+#                - App\Security\KeycloakAuthenticator
+#
+#    access_control:
+#        - { path: ^/docs, roles: IS_AUTHENTICATED_ANONYMOUSLY }}
+#        - { path: ^/, roles: ROLE_USER }
